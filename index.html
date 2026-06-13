@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="th" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Mathematics ป.5 - เรียนรู้อย่างสร้างสรรค์</title>
+    <meta name="description" content="สื่อการเรียนการสอนคณิตศาสตร์แบบโต้ตอบสำหรับนักเรียนชั้นประถมศึกษาปีที่ 5 ครอบคลุมเรื่องเศษส่วน ทศนิยม ร้อยละ และพื้นที่รูปสี่เหลี่ยม">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&family=Sarabun:wght@300;400;500;600;700&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- KaTeX CSS for math rendering -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    
+    <!-- Custom Style Sheet -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- App Container -->
+    <div class="app-layout">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <span class="logo-icon">📐</span>
+                    <div class="logo-text">
+                        <h3>Math ป.5</h3>
+                        <p>สื่อเรียนรู้โต้ตอบ</p>
+                    </div>
+                </div>
+                <button class="mobile-close" id="mobileCloseBtn">
+                    <i data-lucide="x"></i>
+                </button>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <a href="#home" class="nav-item active" data-tab="home" id="nav-home">
+                    <i data-lucide="home"></i>
+                    <span>หน้าแรก</span>
+                </a>
+                <a href="#lessons" class="nav-item" data-tab="lessons" id="nav-lessons">
+                    <i data-lucide="book-open"></i>
+                    <span>บทเรียน & กิจกรรม</span>
+                </a>
+                <a href="#tools" class="nav-item" data-tab="tools" id="nav-tools">
+                    <i data-lucide="sliders"></i>
+                    <span>เครื่องมือคณิตศาสตร์</span>
+                </a>
+                <a href="#project" class="nav-item" data-tab="project" id="nav-project">
+                    <i data-lucide="palette"></i>
+                    <span>โครงงานสถาปนิกน้อย</span>
+                </a>
+                <a href="#certificate" class="nav-item locked" data-tab="certificate" id="nav-certificate">
+                    <i data-lucide="award"></i>
+                    <span>เกียรติบัตร</span>
+                    <i data-lucide="lock" class="lock-icon"></i>
+                </a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <div class="progress-container">
+                    <div class="progress-info">
+                        <span>ความคืบหน้าการเรียน</span>
+                        <span id="overallProgressPercent">0%</span>
+                    </div>
+                    <div class="progress-bar-bg">
+                        <div class="progress-bar" id="overallProgressBar" style="width: 0%"></div>
+                    </div>
+                </div>
+                <div class="user-info">
+                    <div class="avatar">👨‍🎓</div>
+                    <div class="user-details">
+                        <span class="user-name" id="userNameDisplay">ผู้เรียนคณิตศาสตร์</span>
+                        <span class="user-role" id="userEditNameBtn">แก้ไขชื่อ <i data-lucide="edit-3"></i></span>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <!-- Header/Topbar -->
+            <header class="topbar">
+                <div class="topbar-left">
+                    <button class="mobile-menu-toggle" id="mobileMenuToggleBtn">
+                        <i data-lucide="menu"></i>
+                    </button>
+                    <h2 id="currentSectionTitle">หน้าแรก</h2>
+                </div>
+                <div class="topbar-right">
+                    <!-- Math Engine status -->
+                    <div class="pyodide-status" id="pythonStatus">
+                        <span class="status-indicator green" id="mathStatusIndicator"></span>
+                        <span>เครื่องมือคณิตศาสตร์พร้อมใช้งาน</span>
+                    </div>
+                    <!-- Theme Toggle -->
+                    <button class="theme-toggle" id="themeToggleBtn" title="สลับโหมด มืด/สว่าง">
+                        <i data-lucide="sun" class="sun-icon"></i>
+                        <i data-lucide="moon" class="moon-icon"></i>
+                    </button>
+                </div>
+            </header>
+
+            <!-- Content Screens -->
+            <div class="screen-container">
+                
+                <!-- SCREEN 1: HOME -->
+                <section class="screen active" id="screen-home">
+                    <div class="hero-card">
+                        <div class="hero-content">
+                            <h1>คณิตศาสตร์ชั้นประถมศึกษาปีที่ 5 แบบโต้ตอบ</h1>
+                            <p class="subtitle">เรียนรู้ผ่านสื่ออินเตอร์แอคทีฟเสมือนจริง สนุก เข้าใจง่าย และเห็นภาพเป็นรูปธรรม</p>
+                            <p class="description">
+                                ยินดีต้อนรับสู่ห้องปฏิบัติการคณิตศาสตร์ออนไลน์! ที่นี่น้องๆ จะได้เรียนรู้เนื้อหาคณิตศาสตร์หลักของชั้น ป.5 
+                                ทั้งเรื่อง **เศษส่วน, ทศนิยม, ร้อยละ/เปอร์เซ็นต์ และพื้นที่รูปทรงสี่เหลี่ยม** ผ่านชุดสื่อภาพขยับได้ (Interactive Visualizers) 
+                                ที่สามารถปรับแต่งค่าได้แบบเรียลไทม์ พร้อมด้วยแบบทดสอบประเมินความรู้ 6 ระดับ และร่วมสวมบทบาทเป็น **สถาปนิกน้อย** จัดสรรจัดทำพื้นที่โครงการจริง!
+                            </p>
+                            <div class="hero-actions">
+                                <button class="btn btn-primary btn-lg" onclick="app.switchTab('lessons')">
+                                    <i data-lucide="play"></i> เริ่มต้นเรียนรู้
+                                </button>
+                                <button class="btn btn-outline btn-lg" onclick="app.switchTab('tools')">
+                                    <i data-lucide="sliders"></i> กล่องเครื่องมือคณิตศาสตร์
+                                </button>
+                            </div>
+                        </div>
+                        <div class="hero-graphics">
+                            <div class="code-badge">Interactive Math</div>
+                            <div class="math-badge">Grade 5 สพฐ.</div>
+                            <svg class="hero-svg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                                <rect x="30" y="30" width="140" height="140" rx="20" fill="var(--color-primary-light)" stroke="var(--color-primary)" stroke-width="2" />
+                                <circle cx="100" cy="100" r="45" fill="none" stroke="var(--color-secondary)" stroke-width="8" stroke-dasharray="180 100" />
+                                <line x1="60" y1="60" x2="140" y2="140" stroke="var(--text-muted)" stroke-width="3" />
+                                <text x="93" y="105" font-family="'Kanit', sans-serif" font-weight="bold" font-size="20" fill="var(--text-primary)">ป.5</text>
+                            </svg>
+                        </div>
+                    </div>
+
+                    <!-- Course Structure Cards -->
+                    <div class="section-title-wrap">
+                        <h3>เนื้อหาการเรียนรู้ 4 บทเรียนหลัก</h3>
+                        <p>ศึกษาแนวคิด ทฤษฎี พร้อมจำลองแบบฝึกหัดโต้ตอบจากภาพ</p>
+                    </div>
+
+                    <div class="course-grid">
+                        <!-- Unit 1 -->
+                        <div class="course-card" onclick="app.switchTab('lessons', 0)">
+                            <div class="card-icon unit-1">1</div>
+                            <div class="card-body">
+                                <h4>1. เศษส่วนและการดำเนินการ</h4>
+                                <p>เรียนรู้เศษส่วน, จำนวนคละ, การเปรียบเทียบขนาด และการบวก ลบ คูณ หารเศษส่วนด้วยภาพวงกลมปรับค่าได้</p>
+                                <div class="card-progress">
+                                    <div class="progress-dots" id="unit-0-dots"></div>
+                                    <span class="unit-status-text" id="unit-0-status">ยังไม่เริ่ม</span>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Unit 2 -->
+                        <div class="course-card" onclick="app.switchTab('lessons', 1)">
+                            <div class="card-icon unit-2">2</div>
+                            <div class="card-body">
+                                <h4>2. ทศนิยมและการเชื่อมโยง</h4>
+                                <p>ทำความเข้าใจความสัมพันธ์ของเศษส่วนและทศนิยม การคำนวณคูณหารทศนิยมผ่านตารางแรเงา 100 ช่องสะท้อนพื้นที่</p>
+                                <div class="card-progress">
+                                    <div class="progress-dots" id="unit-1-dots"></div>
+                                    <span class="unit-status-text" id="unit-1-status">ยังไม่เริ่ม</span>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Unit 3 -->
+                        <div class="course-card" onclick="app.switchTab('lessons', 2)">
+                            <div class="card-icon unit-3">3</div>
+                            <div class="card-body">
+                                <h4>3. ร้อยละและบทประยุกต์</h4>
+                                <p>เรียนรู้อัตราส่วน เปอร์เซ็นต์ บทประยุกต์ของร้อยละ กำไร ขาดทุน และการลดราคาผ่านเครื่องช่วยจำลองซื้อของร้านสหกรณ์</p>
+                                <div class="card-progress">
+                                    <div class="progress-dots" id="unit-2-dots"></div>
+                                    <span class="unit-status-text" id="unit-2-status">ยังไม่เริ่ม</span>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Unit 4 -->
+                        <div class="course-card" onclick="app.switchTab('lessons', 3)">
+                            <div class="card-icon unit-4">4</div>
+                            <div class="card-body">
+                                <h4>4. รูปสี่เหลี่ยมและพื้นที่</h4>
+                                <p>ศึกษาคุณสมบัติรูปสี่เหลี่ยมด้านขนาน มุมฉาก ผืนผ้า พร้อมบอร์ดเรขาคณิตจำลองเพื่อปรับลากความกว้าง ความสูง และคำนวณพื้นที่</p>
+                                <div class="card-progress">
+                                    <div class="progress-dots" id="unit-3-dots"></div>
+                                    <span class="unit-status-text" id="unit-3-status">ยังไม่เริ่ม</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Capstone Project Callout -->
+                    <div class="final-project-banner">
+                        <div class="banner-text">
+                            <h3>🎓 โครงงานปลายภาค: โครงงานสถาปนิกน้อยจัดสรรพื้นที่</h3>
+                            <p>ใช้ทักษะคณิตศาสตร์ ป.5 ที่เรียนมาทั้งหมดในการวางแผนแบ่งโซนพื้นที่อุทยานการเรียนรู้ คำนวณความยาวรอบรูป คำนวณค่าปลูกหญ้า ลานของเล่น สระน้ำ และคำนวณส่วนลดร้อยละงบประมาณ เพื่อผ่านการประเมินและปลดรับเกียรติบัตรเหรียญทอง!</p>
+                        </div>
+                        <button class="btn btn-secondary" onclick="app.switchTab('project')">
+                            เริ่มสร้างโครงงานสถาปนิกน้อย <i data-lucide="arrow-right"></i>
+                        </button>
+                    </div>
+                </section>
+
+                <!-- SCREEN 2: LESSONS & QUIZZES -->
+                <section class="screen" id="screen-lessons">
+                    <div class="lessons-layout">
+                        <!-- Left Panel: Lesson Outline & Navigation -->
+                        <div class="lessons-sidebar">
+                            <h4 class="sidebar-title">บทเรียนวิชาคณิตศาสตร์</h4>
+                            <div class="accordion" id="lessonsAccordion">
+                                <!-- Generated Dynamically by JS -->
+                            </div>
+                        </div>
+
+                        <!-- Center Panel: Lesson Content Viewer -->
+                        <div class="lesson-content-panel">
+                            <div class="lesson-header-bar">
+                                <div class="breadcrumbs">
+                                    <span id="breadcrumb-unit">หน่วยที่ 1</span> &gt;
+                                    <span id="breadcrumb-topic" class="active">การเปรียบเทียบเศษส่วน</span>
+                                </div>
+                                <div class="lesson-nav-actions">
+                                    <button class="btn btn-sm btn-outline" id="prevLessonBtn"><i data-lucide="chevron-left"></i> ย้อนกลับ</button>
+                                    <button class="btn btn-sm btn-primary" id="nextLessonBtn">ถัดไป <i data-lucide="chevron-right"></i></button>
+                                </div>
+                            </div>
+
+                            <div class="lesson-scroll-area" id="lessonContentContainer">
+                                <!-- Generated Dynamically by JS -->
+                            </div>
+                        </div>
+
+                        <!-- Right Panel: Micro-Interactive Tool Contextual -->
+                        <div class="lessons-ide-panel" id="lessonsToolPanel">
+                            <div class="panel-header">
+                                <span><i data-lucide="compass"></i> สื่อฝึกทักษะประกอบบทเรียน</span>
+                            </div>
+                            <div class="mini-tool-container" id="miniToolContextContainer">
+                                <!-- Loaded dynamically with the visualizer matching the lesson topic -->
+                                <div class="fs-empty">เลือกบทเรียนที่ต้องการเพื่อเปิดกล่องเครื่องมือทดลองจำลองภาพ</div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- SCREEN 3: MATH TOOLS PLAYGROUND -->
+                <section class="screen" id="screen-tools">
+                    <div class="tools-layout-header">
+                        <h2>กล่องทดลองคณิตศาสตร์เสมือนจริง (Math Playground Sandbox)</h2>
+                        <p>เลือกสื่อโต้ตอบที่คุณต้องการศึกษาเพื่อปรับแต่งค่า ทดสอบโครงสร้าง และเรียนรู้ผ่านแผนภาพเรขาคณิต</p>
+                        <div class="tool-selector-tabs">
+                            <button class="tool-tab-btn active" data-tool="fraction">เครื่องมือเศษส่วนเสมือนจริง</button>
+                            <button class="tool-tab-btn" data-tool="decimal">เครื่องมือตารางร้อยทศนิยม</button>
+                            <button class="tool-tab-btn" data-tool="percentage">เครื่องจำลองราคาส่วนลดร้อยละ</button>
+                            <button class="tool-tab-btn" data-tool="geometry">บอร์ดพื้นที่เรขาคณิตผืนผ้า-ด้านขนาน</button>
+                        </div>
+                    </div>
+
+                    <div class="tool-sandbox-viewport" id="sandboxViewport">
+                        <!-- Loaded dynamically based on selected tab -->
+                    </div>
+                </section>
+
+                <!-- SCREEN 4: CAPSTONE PROJECT -->
+                <section class="screen" id="screen-project">
+                    <div class="project-layout">
+                        <!-- Left Panel: Project Guideline & Inputs -->
+                        <div class="project-guide-pane">
+                            <div class="card">
+                                <h3>โครงงานสถาปนิกน้อยจัดสรรพื้นที่ (อุทยานการเรียนรู้ ป.5)</h3>
+                                <p>คุณได้รับบทบาทเป็น <strong>"สถาปนิกหัวหน้าโครงการ"</strong> ในการจัดแบ่งที่ดินโครงการขนาดกว้าง 10 เมตร ยาว 10 เมตร (พื้นที่ทั้งหมด 100 ตารางเมตร) ออกเป็น 3 โซนหลักตามเงื่อนไข ดังนี้:</p>
+                                
+                                <div class="project-requirements math-project-reqs">
+                                    <div class="proj-zone-info">
+                                        <h5>🌳 1. โซนสวนหญ้า (รูปสี่เหลี่ยมผืนผ้า)</h5>
+                                        <p>ขนาดกว้าง 6 เมตร, ยาว 8 เมตร (ค่าก่อสร้างหญ้าเทียม ตารางเมตรละ 150 บาท)</p>
+                                        <div class="input-group-math">
+                                            <label>พื้นที่โซนสวนหญ้า (ตารางเมตร):</label>
+                                            <input type="number" id="projAreaA" class="form-control form-control-sm" placeholder="คำนวณและกรอกที่นี่">
+                                        </div>
+                                        <div class="input-group-math">
+                                            <label>ค่าก่อสร้างสวนหญ้า (บาท):</label>
+                                            <input type="number" id="projCostA" class="form-control form-control-sm" placeholder="คำนวณและกรอกที่นี่">
+                                        </div>
+                                    </div>
+
+                                    <div class="proj-zone-info">
+                                        <h5>🧸 2. โซนลานเครื่องเล่น (รูปสี่เหลี่ยมจัตุรัส)</h5>
+                                        <p>ความกว้างแต่ละด้านเท่ากับ 4 เมตร (ค่าทำพื้นยางกันกระแทก ตารางเมตรละ 250 บาท)</p>
+                                        <div class="input-group-math">
+                                            <label>พื้นที่โซนเครื่องเล่น (ตารางเมตร):</label>
+                                            <input type="number" id="projAreaB" class="form-control form-control-sm" placeholder="คำนวณและกรอกที่นี่">
+                                        </div>
+                                        <div class="input-group-math">
+                                            <label>ค่าปูพื้นลานเครื่องเล่น (บาท):</label>
+                                            <input type="number" id="projCostB" class="form-control form-control-sm" placeholder="คำนวณและกรอกที่นี่">
+                                        </div>
+                                    </div>
+
+                                    <div class="proj-zone-info">
+                                        <h5>💦 3. โซนสระบัวนิเวศ (รูปสี่เหลี่ยมด้านขนาน)</h5>
+                                        <p>ความยาวฐาน 5 เมตร, ความสูง 3 เมตร (ค่าขุดแต่งและปูฉนวน ตารางเมตรละ 400 บาท)</p>
+                                        <div class="input-group-math">
+                                            <label>พื้นที่โซนสระบัว (ตารางเมตร):</label>
+                                            <input type="number" id="projAreaC" class="form-control form-control-sm" placeholder="คำนวณและกรอกที่นี่">
+                                        </div>
+                                        <div class="input-group-math">
+                                            <label>ค่าจัดทำสระบัว (บาท):</label>
+                                            <input type="number" id="projCostC" class="form-control form-control-sm" placeholder="คำนวณและกรอกที่นี่">
+                                        </div>
+                                    </div>
+
+                                    <div class="proj-zone-info">
+                                        <h5>📊 4. สรุปผลรวมงบประมาณโครงการ</h5>
+                                        <div class="input-group-math">
+                                            <label>รวมพื้นที่ทั้ง 3 โซน (ตารางเมตร):</label>
+                                            <input type="number" id="projTotalArea" class="form-control form-control-sm" placeholder="รวมพื้นที่ A + B + C">
+                                        </div>
+                                        <div class="input-group-math">
+                                            <label>รวมราคาค่าก่อสร้างก่อนลดราคา (บาท):</label>
+                                            <input type="number" id="projTotalCost" class="form-control form-control-sm" placeholder="รวมราคาทั้ง 3 โซน">
+                                        </div>
+                                        <div class="input-group-math">
+                                            <label>ยอดรวมราคาค่าก่อสร้างสุทธิ หลังได้รับส่วนลดพิเศษร้อยละ 10 (บาท):</label>
+                                            <input type="number" id="projNetCost" class="form-control form-control-sm" placeholder="หักส่วนลด 10% จากราคารวม">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div style="display: flex; gap: 12px; margin-top: 20px;">
+                                    <button class="btn btn-outline" id="resetProjectMathBtn">รีเซ็ตคำตอบ</button>
+                                    <button class="btn btn-primary" style="flex: 1;" id="validateProjectMathBtn">
+                                        <i data-lucide="check-square"></i> ส่งและประเมินโครงงานสถาปนิก
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Right Panel: Visual Map Blueprint & Grader -->
+                        <div class="project-editor-pane" style="padding: 24px; display: flex; flex-direction: column; gap: 20px; background-color: var(--bg-primary);">
+                            <div class="card" style="flex: 1; display: flex; flex-direction: column;">
+                                <h4>พิมพ์เขียวแผนผังอุทยานการเรียนรู้ ป.5 (Blueprint Grid Map)</h4>
+                                <p style="font-size: 12px; color: var(--text-muted);">
+                                    พิมพ์เขียวจำลองพิกัดจริงกว้าง 10 เมตร x 10 เมตร แสดการจัดแบ่งสัดส่วนแต่ละโซน พื้นที่ว่างที่เหลือจะจัดทำสวนหย่อมสาธารณะ
+                                </p>
+                                <div class="blueprint-container" id="blueprintContainer" style="flex: 1; display: flex; align-items: center; justify-content: center; min-height: 250px;">
+                                    <!-- Dynamic SVG Blueprint of the Project -->
+                                    <svg viewBox="0 0 100 100" class="blueprint-svg" style="width: 250px; height: 250px; background-color: #0f172a; border: 2px solid var(--border-color); border-radius: var(--radius-sm);">
+                                        <!-- Grid lines -->
+                                        <defs>
+                                            <pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse">
+                                                <path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="0.5"/>
+                                            </pattern>
+                                        </defs>
+                                        <rect width="100%" height="100%" fill="url(#grid)" />
+                                        
+                                        <!-- Green Rectangle (Zone A: Garden 6x8) -->
+                                        <rect x="0" y="0" width="60" height="80" fill="rgba(16, 185, 129, 0.3)" stroke="#10b981" stroke-width="1.5" />
+                                        <text x="3" y="10" font-size="5" fill="#f8fafc" font-weight="bold">🌳 สวนหญ้า (A)</text>
+                                        <text x="3" y="16" font-size="4" fill="#a7f3d0">กว้าง 6ม. ยาว 8ม.</text>
+                                        
+                                        <!-- Blue Square (Zone B: Playground 4x4) -->
+                                        <rect x="60" y="0" width="40" height="40" fill="rgba(59, 130, 246, 0.3)" stroke="#3b82f6" stroke-width="1.5" />
+                                        <text x="63" y="10" font-size="5" fill="#f8fafc" font-weight="bold">🧸 ของเล่น (B)</text>
+                                        <text x="63" y="16" font-size="4" fill="#bfdbfe">ด้านละ 4ม.</text>
+
+                                        <!-- Rhombus / Parallelogram (Zone C: Pond base 5, height 3 -> drawn relative to coordinates) -->
+                                        <polygon points="50,80 100,80 90,100 40,100" fill="rgba(245, 158, 11, 0.3)" stroke="#f59e0b" stroke-width="1.5" />
+                                        <text x="55" y="88" font-size="5" fill="#f8fafc" font-weight="bold">💦 สระบัว (C)</text>
+                                        <text x="55" y="94" font-size="4" fill="#fde68a">ฐาน 5ม. สูง 3ม.</text>
+
+                                        <!-- Outer boundary -->
+                                        <rect x="0" y="0" width="100" height="100" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="1" />
+                                    </svg>
+                                </div>
+                            </div>
+
+                            <div class="card" style="height: 180px; display: flex; flex-direction: column;">
+                                <h4>บอร์ดรายงานสถานะการประเมินวิเคราะห์ (Evaluation Console)</h4>
+                                <div class="project-console-output" id="mathProjectConsole" style="flex: 1; padding: 12px; background-color: #0f172a; border-radius: var(--radius-sm); font-family: var(--font-mono); font-size: 13px; line-height: 1.6; overflow-y: auto; color: #cbd5e1;">
+                                    กรอกคำตอบของคุณในฟอร์มด้านซ้ายและคลิกปุ่ม "ส่งและประเมินโครงงานสถาปนิก" เพื่อเริ่มต้นทดสอบความถูกต้อง
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- SCREEN 5: CERTIFICATE -->
+                <section class="screen" id="screen-certificate">
+                    <div class="certificate-layout">
+                        <div class="certificate-card-wrapper">
+                            <div class="certificate-container" id="certificatePrintArea">
+                                <div class="cert-border"></div>
+                                <div class="cert-body">
+                                    <div class="cert-header">
+                                        <div class="cert-seal">🎖️</div>
+                                        <h2>ใบประกาศเกียรติบัตรคณิตศาสตร์กิตติมศักดิ์</h2>
+                                        <p class="cert-sub">Interactive Mathematics E-Learning Platform</p>
+                                    </div>
+                                    <div class="cert-content">
+                                        <p>เกียรติบัตรฉบับนี้ให้ไว้เพื่อแสดงว่า</p>
+                                        <h1 class="student-name" id="certStudentName">ชื่อ นามสกุล</h1>
+                                        <p class="cert-detail">ได้ผ่านการเรียนรู้หลักสูตรพื้นฐานเศษส่วน ทศนิยม บทประยุกต์ร้อยละกำไร และเรขาคณิตรูปทรงสี่เหลี่ยม</p>
+                                        <h3 class="cert-course-name">วิชาคณิตศาสตร์ ชั้นประถมศึกษาปีที่ 5 แบบโต้ตอบ</h3>
+                                        <p class="cert-taxonomy">ผ่านการประเมินทักษะทางคณิตศาสตร์ครบถ้วน 6 ลำดับขั้นตามแนวคิดอนุกรมวิธานของบลูม</p>
+                                    </div>
+                                    <div class="cert-footer">
+                                        <div class="signature-block">
+                                            <div class="sig-line"></div>
+                                            <p>ระบบตรวจสอบและวิเคราะห์แบบจำลองคณิตศาสตร์</p>
+                                            <p class="sig-title">ผู้ตรวจสอบและมอบเกียรติบัตร</p>
+                                        </div>
+                                        <div class="date-block">
+                                            <span id="certCompletionDate">วันที่ 13 มิถุนายน 2569</span>
+                                            <p>วันที่สำเร็จการศึกษา</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="certificate-controls">
+                                <h3>ขอแสดงความยินดีด้วย! 🌟</h3>
+                                <p>คุณได้ทำการศึกษาเนื้อหา ทำแบบประเมินครบทุกข้อ และจัดสรรพิมพ์เขียวในโครงงานสถาปนิกคณิตศาสตร์ ป.5 ผ่านเกณฑ์ 100% สำเร็จเป็นที่เรียบร้อย</p>
+                                
+                                <div class="form-group">
+                                    <label for="studentNameInput">แก้ไขชื่อ-นามสกุลของคุณเพื่อพิมพ์ลงเกียรติบัตร:</label>
+                                    <div class="input-inline">
+                                        <input type="text" id="studentNameInput" class="form-control" value="ผู้เรียนคณิตศาสตร์">
+                                        <button class="btn btn-secondary" id="updateCertNameBtn">อัปเดตชื่อ</button>
+                                    </div>
+                                </div>
+
+                                <div class="action-buttons">
+                                    <button class="btn btn-primary btn-lg" id="downloadPdfBtn">
+                                        <i data-lucide="download"></i> ดาวน์โหลดเกียรติบัตร (PDF)
+                                    </button>
+                                    <button class="btn btn-outline btn-lg" id="downloadPngBtn">
+                                        <i data-lucide="image"></i> ดาวน์โหลดเป็นรูปภาพ (PNG)
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+        </main>
+    </div>
+
+    <!-- Edit User Name Modal -->
+    <div class="modal-backdrop" id="nameModal">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3>ยินดีต้อนรับสู่แล็บคณิตศาสตร์ ป.5</h3>
+            </div>
+            <div class="modal-body">
+                <p>กรุณาระบุชื่อของคุณเพื่อเริ่มเรียนรู้และจัดทำใบเกียรติบัตรส่วนบุคคลหลังจากสำเร็จโครงงานวิชา</p>
+                <div class="form-group">
+                    <input type="text" id="inputStudentName" class="form-control" placeholder="ชื่อ - นามสกุลของคุณ" value="ผู้เรียนคณิตศาสตร์">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" id="saveNameModalBtn">ตกลงและเริ่มต้นเรียน</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- KaTeX JS -->
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    
+    <!-- PDF & Image Generation Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    
+    <!-- Application Logic Modules -->
+    <script src="js/lessons.js"></script>
+    <script src="js/visualizers.js"></script>
+    <script src="js/project.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
